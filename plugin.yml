@@ -1,0 +1,14 @@
+name: RankList
+main: com.teozcommunity.teozfrank.RankList
+version: 0.5.1
+author: teozfrank
+commands:
+   ranklist:
+      description: This is a list of ranks for our server.
+      usage: /<command>
+      aliases: rnklst
+permissions:
+   ranklist.reload:
+      description: Allows a user to reload the config.
+      default: op
+      
