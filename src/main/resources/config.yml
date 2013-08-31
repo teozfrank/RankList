@@ -1,5 +1,5 @@
 #
-# Ranklist v0.2 Configuration File
+# Ranklist v0.6+ Configuration File
 # =====================================
 #
 # Please Don't use tabs in .yml file!
@@ -12,9 +12,15 @@
 #  NOTE: to add another rank simply remove the "#" and call it what you wish 
 #  (no qoutes) then reload the server and try /ranklist to see the changes
 #  also please do NOT add more than 10 ranks as this will not work as of yet
-#  You can also change the server name to what ever you wish, enjoy! 
+#  You can also change the server name to what ever you wish, enjoy!
+#
+# default values
+# checkforupdates: true  - should the plugin check for updates? (recommended)
+# servername: 'my servername' - your server name
+# rank1: 'member' - rank1 to rank20 , change to your liking and reload the plugin
 
 ranklist:
+  checkforupdates: true
   servername: 'TeOzCommunity Minecraft Server'
   rank1: 'umember'
 #  rank2: 'member'

@@ -1,5 +1,7 @@
-package com.teozcommunity.teozfrank;
+package com.teozcommunity.teozfrank.ranklist.commands;
 
+import com.teozcommunity.teozfrank.ranklist.main.RankList;
+import com.teozcommunity.teozfrank.ranklist.util.ChatColorHelper;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,36 +11,33 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Commands extends JavaPlugin implements CommandExecutor {
 	
-	private final RankList plugin;
+	private RankList plugin;
 	String[] ranks = new String[20];
 	
-	public Commands(RankList instance) {
-        this.plugin = instance;
+	public Commands(RankList plugin) {
+        this.plugin = plugin;
     }
 	
 	   public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String args[])
 	    {
 	        	if(args.length<1&&sender instanceof Player){
-	        		sender.sendMessage("--------------------------------------");
-	        		sender.sendMessage("\247f----"+ChatColorHelper.replaceColorCodes(plugin.getConfig().getString("ranklist.servername"))+"\247f----\n"
-	        						+"\247a=---These are the rank(s) on our server---=\n"
-	            					+"\247a=---Listed from the least powerful to the most---=\n");
+	        		sender.sendMessage(ChatColor.GOLD+"()---- "+ ChatColorHelper.replaceColorCodes(plugin.getConfig().getString("ranklist.servername"))+
+                            ChatColor.GOLD+" ----()\n\n"+
+	        						ChatColor.GOLD+"=--- These are the rank(s) on our server ---\n"+
+	            					"=--- Listed from the least powerful to the most ---=\n");
 	        		sender.sendMessage("");
 	            
 	            
 	        		for(int x=1;x<=ranks.length;x++){
 	        			if(plugin.getConfig().contains("ranklist.rank"+x))
 	        			{
-		            	sender.sendMessage(x+".- "+ChatColorHelper.replaceColorCodes(plugin.getConfig().getString("ranklist.rank"+x)));
+		            	sender.sendMessage(ChatColor.GOLD+String.valueOf(x)+".- "+ChatColorHelper.replaceColorCodes(plugin.getConfig().getString("ranklist.rank"+x)));
 	        			}	
 	        		}
 	            
 	        		sender.sendMessage("");
-	        		sender.sendMessage("--------------------------------------");
-	            
-	        		sender.sendMessage("--------------------------------------");
-	        		sender.sendMessage("\247b=--RankList 0.5.1 for 1.5.2 available on bukkit Dev--=");
-	        		sender.sendMessage("\247b==--http://dev.bukkit.org/server-mods/rank-list/--==");
+	        		sender.sendMessage(ChatColor.GOLD+"=-- RankList "+plugin.version+" for 1.6.2 available on bukkit Dev --=");
+	        		sender.sendMessage(ChatColor.GOLD+"==-- http://dev.bukkit.org/server-mods/rank-list/ --==");
 	            
 	        		return true;
 	        	}

@@ -1,4 +1,4 @@
-package com.teozcommunity.teozfrank;
+package com.teozcommunity.teozfrank.ranklist.util;
 
 import org.bukkit.ChatColor;
 

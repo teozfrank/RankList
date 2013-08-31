@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="RankList:jar">
+    <output-path>$PROJECT_DIR$/../../DevServer/plugins</output-path>
+    <root id="archive" name="RankList.jar">
+      <element id="module-output" name="RankList" />
+    </root>
+  </artifact>
+</component>
