@@ -10,7 +10,7 @@
     <description>RankList, Displays the ranks of a server</description>
 
     <properties>
-        <bukkit.version>1.6.2-R0.1-SNAPSHOT</bukkit.version>
+        <bukkit.version>1.6.4-R0.1-SNAPSHOT</bukkit.version>
     </properties>
 
     <repositories>

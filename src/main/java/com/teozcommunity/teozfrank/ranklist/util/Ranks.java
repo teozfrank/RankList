@@ -10,8 +10,7 @@ public class Ranks {
 	private String rankPerms;
 	
 	
-	public Ranks()
-	{
+	public Ranks() {
 		rankName = "";
 		rankPrice = 0.00;
 		rankDesc = "";
@@ -27,43 +26,35 @@ public class Ranks {
 		this.rankPerms = rankPerms;
 	}
 
-	public void setRankName(String r)
-	{
+	public void setRankName(String r) {
 		rankName = r;
 	}
 	
-	public String getRankName()
-	{
+	public String getRankName() {
 		return rankName;
 	}
 	
-	public void setRankPrice(Double p)
-	{
+	public void setRankPrice(Double p) {
 		rankPrice = p;
 	}
 	
-	public Double getRankPrice()
-	{
+	public Double getRankPrice() {
 		return rankPrice;
 	}
 	
-	public void setRankDesc(String d)
-	{
+	public void setRankDesc(String d) {
 		rankDesc = d;
 	}
 	
-	public String getRankDesc()
-	{
+	public String getRankDesc() {
 		return rankDesc;
 	}
 	
-	public void setRankPerms(String ps)
-	{
+	public void setRankPerms(String ps) {
 		rankPerms = ps;
 	}
 	
-	public String getRankPerms()
-	{
+	public String getRankPerms() {
 		return rankPerms; 
 	}
 

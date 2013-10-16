@@ -6,6 +6,7 @@ import com.teozcommunity.teozfrank.MetricsLite;
 import com.teozcommunity.teozfrank.ranklist.events.PlayerJoin;
 import com.teozcommunity.teozfrank.ranklist.util.SendConsoleMessage;
 import com.teozcommunity.teozfrank.ranklist.util.UpdateChecker;
+import com.teozcommunity.teozfrank.ranklist.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,13 +17,17 @@ public class RankList extends JavaPlugin {
     //our update checker class
     public UpdateChecker updateChecker;
 
-    //our console message sender class
+    // console message sender class
     public SendConsoleMessage sendConsoleMessage;
+
+    public Util util;
+
 
     @Override
     public void onEnable(){
         this.version = this.getDescription().getVersion();
         this.sendConsoleMessage = new SendConsoleMessage(this);
+        this.util = new Util(this);
         this.sendConsoleMessage.info("Enabling");
         this.updateChecker = new UpdateChecker(this,"http://dev.bukkit.org/bukkit-plugins/rank-list/files.rss");
         this.checkForUpdates();

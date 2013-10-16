@@ -1,44 +1,38 @@
 #
-# Ranklist v0.6+ Configuration File
+# Ranklist v0.7+ Configuration File
 # =====================================
 #
-# Please Don't use tabs in .yml file!
+# Please Don't use tabs in .yml file use spaces!
 #  
 # If for whatever reason you mess up this config just delete this config and
 # the plugin will create you a new one!
 #
 # Please leave a comment or pm on bukkit dev if you have any trouble setting this up - TeOzFrAnK
 
-#  NOTE: to add another rank simply remove the "#" and call it what you wish 
-#  (no qoutes) then reload the server and try /ranklist to see the changes
-#  also please do NOT add more than 10 ranks as this will not work as of yet
+#  NOTE: to add another rank simply go to a new line then type "- 'newrankhere' " without quotes
+#  (no qoutes) then reload the plugin and try /ranklist to see the changes
 #  You can also change the server name to what ever you wish, enjoy!
 #
 # default values
 # checkforupdates: true  - should the plugin check for updates? (recommended)
 # servername: 'my servername' - your server name
-# rank1: 'member' - rank1 to rank20 , change to your liking and reload the plugin
+# ranks:
+# - 'insert rank here'
+# - 'insert another rank here'
 
 ranklist:
   checkforupdates: true
   servername: 'TeOzCommunity Minecraft Server'
-  rank1: 'umember'
-#  rank2: 'member'
-#  rank3: 'donator'
-#  rank4: 'donator+'
-#  rank5: 'moderator'
-#  rank6: 'moderator+'
-#  rank7: 'admin'
-#  rank8: 'admin+'
-#  rank9: 'admin+++'
-#  rank11: 'rank11'
-#  rank12: 'rank12'
-#  rank13: 'rank13'
-#  rank14: 'rank14'
-#  rank15: 'rank15'
-#  rank16: 'rank16'
-#  rank17: 'rank17'
-#  rank18: 'rank18'
-#  rank19: 'rank19'
-#  rank20: 'rank20'
+  ranks:
+  - '&anoobie'
+  - '&bmember'
+  - '&ctrusted'
+  - '&1vip'
+  - '&ddonator'
+  - '&2submod'
+  - '&3moderator'
+  - '&2head &8moderator'
+  - 'admin'
+  - 'head admin'
+  - 'owner'
 

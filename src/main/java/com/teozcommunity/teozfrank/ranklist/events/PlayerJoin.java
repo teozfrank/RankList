@@ -33,7 +33,6 @@ public class PlayerJoin implements Listener {
                 ChatColor.GOLD+"Download: "+ChatColor.GREEN+plugin.updateChecker.getLink());
             }
         }
-
     }
 }
 
