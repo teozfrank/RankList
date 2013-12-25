@@ -1,14 +1,6 @@
 package com.teozcommunity.teozfrank.ranklist.util;
 
 import com.teozcommunity.teozfrank.ranklist.main.RankList;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,53 +9,135 @@ import java.net.URL;
  * Time: 23:42
  * To change this template use File | Settings | File Templates.
  */
-public class UpdateChecker {
 
-    private RankList plugin;
-    private URL fileFeed;
-    private String version;
-    private String version2;
-    private String link;
 
-    public UpdateChecker(RankList plugin,String url){
-          this.plugin = plugin;
-          try{
-              this.fileFeed = new URL(url);
-          }
-          catch (MalformedURLException e){
-              e.printStackTrace();
-          }
-    }
+    import java.io.BufferedReader;
+    import java.io.IOException;
+    import java.io.InputStreamReader;
+    import java.net.MalformedURLException;
+    import java.net.URL;
+    import java.net.URLConnection;
 
-    public boolean updateAvailable(){
-        try {
-            InputStream input = this.fileFeed.openConnection().getInputStream();
-            Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(input);
-            Node latest = document.getElementsByTagName("item").item(0);
-            NodeList children = latest.getChildNodes();
+    import org.json.simple.JSONArray;
+    import org.json.simple.JSONObject;
+    import org.json.simple.JSONValue;
 
-            this.version2 = children.item(1).getTextContent().replaceAll("[a-zA-Z]","");//trims letters
-            this.version = version2.replaceAll(" ","");//trims white space
-            this.link = children.item(3).getTextContent();
+    /**
+     * This class is a barebones example of how to use the BukkitDev ServerMods API to check for file updates.
+     * <br>
+     * See the README file for further information of use.
+     */
+    public class UpdateChecker {
 
-            if(!plugin.version.equals(this.version)){
-                return true;
-            }
+        private RankList plugin;
 
-        } catch (Exception e) {
-            plugin.sendConsoleMessage.severe("error trying to check for updates!");
+        // The project's unique ID
+        private final int projectID;
+
+
+        // Keys for extracting file information from JSON response
+        private static final String API_NAME_VALUE = "name";
+        private static final String API_LINK_VALUE = "downloadUrl";
+        private static final String API_RELEASE_TYPE_VALUE = "releaseType";
+        private static final String API_FILE_NAME_VALUE = "fileName";
+        private static final String API_GAME_VERSION_VALUE = "gameVersion";
+
+        // Static information for querying the API
+        private static final String API_QUERY = "/servermods/files?projectIds=";
+        private static final String API_HOST = "https://api.curseforge.com";
+        public boolean updateAvailable;
+
+        /**
+         * Check for updates anonymously (keyless)
+         *
+         * @param projectID The BukkitDev Project ID, found in the "Facts" panel on the right-side of your project page.
+         */
+        public UpdateChecker(RankList plugin, int projectID) {
+
+            this.plugin = plugin;
+            this.projectID = projectID;
+            this.updateAvailable = false;
+            query();
         }
 
 
-        return false;
-    }
+        /**
+         * Query the API to find the latest approved file's details.
+         */
+        public void query() {
+            URL url = null;
 
-    public String getVersion(){
-        return this.version;
-    }
+            try {
+                // Create the URL to query using the project's ID
+                url = new URL(API_HOST + API_QUERY + projectID);
+            } catch (MalformedURLException e) {
+                // There was an error creating the URL
 
-    public String getLink(){
-        return this.link;
-    }
+                e.printStackTrace();
+                return;
+            }
 
-}
+            try {
+                // Open a connection and query the project
+                URLConnection conn = url.openConnection();
+
+
+                // Add the user-agent to identify the program
+                conn.addRequestProperty("User-Agent", "ServerModsAPI-Example (by Gravity)");
+
+                // Read the response of the query
+                // The response will be in a JSON format, so only reading one line is necessary.
+                final BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String response = reader.readLine();
+
+                // Parse the array of files from the query's response
+                JSONArray array = (JSONArray) JSONValue.parse(response);
+
+                if (array.size() > 0) {
+                    // Get the newest file's details
+                    JSONObject latest = (JSONObject) array.get(array.size() - 1);
+
+                    // Get the version's title
+                    String versionName = (String) latest.get(API_NAME_VALUE);
+
+                    // Get the version's link
+                    String versionLink = (String) latest.get(API_LINK_VALUE);
+
+                    // Get the version's release type
+                    String versionType = (String) latest.get(API_RELEASE_TYPE_VALUE);
+
+                    // Get the version's file name
+                    String versionFileName = (String) latest.get(API_FILE_NAME_VALUE);
+
+                    // Get the version's game version
+                    String versionGameVersion = (String) latest.get(API_GAME_VERSION_VALUE);
+
+
+                    versionName = versionName.replaceAll("[a-zA-Z]", "");
+                    versionName = versionName.replaceAll(" ","");
+
+                    if(!versionName.equals(plugin.version)){
+                        this.updateAvailable = true;
+                        plugin.sendConsoleMessage.info("There is a new update available! download it here "+versionLink);
+                    }
+                    else {
+                        this.updateAvailable = false;
+                        plugin.sendConsoleMessage.info("plugin is up to date!");
+                    }
+
+                } else {
+                    System.out.println("There are no files for this project");
+                }
+            } catch (IOException e) {
+                // There was an error reading the query
+
+                e.printStackTrace();
+                return;
+            }
+        }
+
+        public boolean isUpdateAvailable(){
+            return this.updateAvailable;
+        }
+
+ }

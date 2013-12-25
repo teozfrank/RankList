@@ -22,16 +22,14 @@ public class PlayerJoin implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerJoin(PlayerJoinEvent e){
         Player p = e.getPlayer();
         if(p.isOp()||p.hasPermission("ranklist.update.notify")){
-            if(plugin.updateChecker.updateAvailable()){
-                e.setJoinMessage(ChatColor.GOLD+"[RankList] "+ChatColor.GREEN+"has an update!\n"+
-                ChatColor.GOLD+"Your version: "+ChatColor.GREEN+plugin.version+"\n"+
-                ChatColor.GOLD+"Latest version: "+ChatColor.GREEN+plugin.updateChecker.getVersion()+"\n"+
-                ChatColor.GOLD+"Download: "+ChatColor.GREEN+plugin.updateChecker.getLink());
-            }
+           if(plugin.updateChecker.updateAvailable){
+               p.sendMessage(ChatColor.GREEN+"There is an update available for "+ChatColor.AQUA+
+                       "RankList,"+ChatColor.GREEN+" download it on bukkit dev.");
+           }
         }
     }
 }

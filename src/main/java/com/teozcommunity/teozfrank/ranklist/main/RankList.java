@@ -29,8 +29,10 @@ public class RankList extends JavaPlugin {
         this.sendConsoleMessage = new SendConsoleMessage(this);
         this.util = new Util(this);
         this.sendConsoleMessage.info("Enabling");
-        this.updateChecker = new UpdateChecker(this,"http://dev.bukkit.org/bukkit-plugins/rank-list/files.rss");
-        this.checkForUpdates();
+        if(this.getConfig().getBoolean("ranklist.checkforupdates")){
+            this.checkForUpdates();
+            Bukkit.getPluginManager().registerEvents(new PlayerJoin(this),this);
+        }
         if(!(new File(getDataFolder(), "config.yml")).exists())
         {
             saveDefaultConfig();
@@ -42,19 +44,12 @@ public class RankList extends JavaPlugin {
             System.out.println("Failed to submit the stats :-("); 
         }
         getCommand("ranklist").setExecutor(new Commands(this));
-        Bukkit.getPluginManager().registerEvents(new PlayerJoin(this),this);
+
         this.sendConsoleMessage.info("Enabled!");
     }
 
     public void checkForUpdates(){
-        if(this.updateChecker.updateAvailable()&&this.getConfig().getBoolean("ranklist.checkforupdates")){
-              this.sendConsoleMessage.info("A new version of this plugin is available: " + this.updateChecker.getVersion());
-              this.sendConsoleMessage.info("Download it here " + this.updateChecker.getLink());
-        }
-        else {
-            this.sendConsoleMessage.info("You are running the latest version! :)");
-        }
-
+        this.updateChecker = new UpdateChecker(this,48781);
     }
 
    	

@@ -22,17 +22,17 @@
 
 ranklist:
   checkforupdates: true
-  servername: 'TeOzCommunity Minecraft Server'
+  servername: '                  &bTeOzCommunity Minecraft Server      '
+  description:
+  - '              &6These are the rank(s) on our server     '
+  - '            &aListed from the least powerful to the most     '
   ranks:
   - '&anoobie'
   - '&bmember'
   - '&ctrusted'
-  - '&1vip'
+  - '&fv&ai&bp'
   - '&ddonator'
   - '&2submod'
   - '&3moderator'
   - '&2head &8moderator'
-  - 'admin'
-  - 'head admin'
-  - 'owner'
 
