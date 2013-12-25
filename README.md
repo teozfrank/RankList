@@ -1,4 +1,4 @@
 RankList
 ========
 
-Ranklist Plugin for Craftbukkit, let player know what ranks you have on your server.
+Ranklist Plugin for Craftbukkit, let players know what ranks you have on your server.
