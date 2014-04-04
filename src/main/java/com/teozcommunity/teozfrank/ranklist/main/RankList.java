@@ -16,9 +16,7 @@ public class RankList extends JavaPlugin {
     public String version;
     //our update checker class
     public UpdateChecker updateChecker;
-
-    // console message sender class
-    public SendConsoleMessage sendConsoleMessage;
+    public Commands commands;
 
     public Util util;
 
@@ -26,16 +24,15 @@ public class RankList extends JavaPlugin {
     @Override
     public void onEnable(){
         this.version = this.getDescription().getVersion();
-        this.sendConsoleMessage = new SendConsoleMessage(this);
         this.util = new Util(this);
-        this.sendConsoleMessage.info("Enabling");
+        SendConsoleMessage.info("Enabling");
         if(this.getConfig().getBoolean("ranklist.checkforupdates")){
             this.checkForUpdates();
             Bukkit.getPluginManager().registerEvents(new PlayerJoin(this),this);
         }
         if(!(new File(getDataFolder(), "config.yml")).exists())
         {
-            saveDefaultConfig();
+            this.saveDefaultConfig();
         }
         try {
             MetricsLite metrics = new MetricsLite(this);
@@ -45,7 +42,7 @@ public class RankList extends JavaPlugin {
         }
         getCommand("ranklist").setExecutor(new Commands(this));
 
-        this.sendConsoleMessage.info("Enabled!");
+        SendConsoleMessage.info("Enabled!");
     }
 
     public void checkForUpdates(){

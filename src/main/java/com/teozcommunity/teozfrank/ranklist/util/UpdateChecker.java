@@ -118,11 +118,11 @@ import com.teozcommunity.teozfrank.ranklist.main.RankList;
 
                     if(!versionName.equals(plugin.version)){
                         this.updateAvailable = true;
-                        plugin.sendConsoleMessage.info("There is a new update available! download it here "+versionLink);
+                        SendConsoleMessage.info("There is a new update available! download it here "+versionLink);
                     }
                     else {
                         this.updateAvailable = false;
-                        plugin.sendConsoleMessage.info("plugin is up to date!");
+                        SendConsoleMessage.info("plugin is up to date!");
                     }
 
                 } else {

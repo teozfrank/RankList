@@ -2,6 +2,7 @@ package com.teozcommunity.teozfrank.ranklist.util;
 
 
 import com.teozcommunity.teozfrank.ranklist.main.RankList;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 
@@ -18,10 +19,11 @@ public class SendConsoleMessage {
 
     private RankList plugin;
     private ConsoleCommandSender _cs;
-    private String prefix = ChatColor.GREEN+"[RankList] ";
-    private String info = "[Info] ";
-    private String severe = ChatColor.YELLOW+"[Severe] ";
-    private String warning = ChatColor.RED+"[Warning] ";
+    private static final String prefix = ChatColor.GREEN + "[RankList] ";
+    private static final String info = "[Info] ";
+    private static final String severe = ChatColor.YELLOW + "[Severe] ";
+    private static final String warning = ChatColor.RED + "[Warning] ";
+    private static final String debug = ChatColor.AQUA + "[Debug] ";
 
 
     public SendConsoleMessage(RankList plugin){
@@ -29,16 +31,20 @@ public class SendConsoleMessage {
         _cs = plugin.getServer().getConsoleSender();
     }
 
-    public void info(String message){
-       _cs.sendMessage(prefix + info + message);
+    public static void info(String message){
+        Bukkit.getConsoleSender().sendMessage(prefix + info + message);
     }
 
     public void severe(String message){
-        _cs.sendMessage(prefix + severe + message);
+        Bukkit.getConsoleSender().sendMessage(prefix + severe + message);
     }
 
     public void warning(String message){
-        _cs.sendMessage(prefix + warning + message);
+        Bukkit.getConsoleSender().sendMessage(prefix + warning + message);
+    }
+
+    public void debug(String message){
+        Bukkit.getConsoleSender().sendMessage(prefix + debug + message);
     }
 
 }
