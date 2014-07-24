@@ -16,6 +16,9 @@
 # default values
 # checkforupdates: true  - should the plugin check for updates? (recommended)
 # servername: 'my servername' - your server name
+#  description:
+#  - '              &6You can change this to what     '
+#  - '            &aEver you like     '
 # ranks:
 # - 'insert rank here'
 # - 'insert another rank here'

@@ -4,6 +4,7 @@ import java.io.*;
 import com.teozcommunity.teozfrank.ranklist.commands.*;
 import com.teozcommunity.teozfrank.MetricsLite;
 import com.teozcommunity.teozfrank.ranklist.events.PlayerJoin;
+import com.teozcommunity.teozfrank.ranklist.threads.UpdateCheckThread;
 import com.teozcommunity.teozfrank.ranklist.util.SendConsoleMessage;
 import com.teozcommunity.teozfrank.ranklist.util.UpdateChecker;
 import com.teozcommunity.teozfrank.ranklist.util.Util;
@@ -15,7 +16,6 @@ public class RankList extends JavaPlugin {
     protected String serverName;
     public String version;
     //our update checker class
-    public UpdateChecker updateChecker;
     public Commands commands;
 
     public Util util;
@@ -46,7 +46,7 @@ public class RankList extends JavaPlugin {
     }
 
     public void checkForUpdates(){
-        this.updateChecker = new UpdateChecker(this,48781);
+        getServer().getScheduler().runTask(this, new UpdateCheckThread(this));
     }
 
    	

@@ -1,6 +1,7 @@
 package com.teozcommunity.teozfrank.ranklist.events;
 
 import com.teozcommunity.teozfrank.ranklist.main.RankList;
+import com.teozcommunity.teozfrank.ranklist.util.UpdateChecker;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,7 +27,7 @@ public class PlayerJoin implements Listener {
     public void onPlayerJoin(PlayerJoinEvent e){
         Player p = e.getPlayer();
         if(p.isOp()||p.hasPermission("ranklist.update.notify")){
-           if(plugin.updateChecker.updateAvailable){
+           if(UpdateChecker.isUpdateAvailable()){
                p.sendMessage(ChatColor.GREEN+"There is an update available for "+ChatColor.AQUA+
                        "RankList,"+ChatColor.GREEN+" download it on bukkit dev.");
            }
