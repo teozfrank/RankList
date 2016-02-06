@@ -42,8 +42,6 @@ public class Util {
            sender.sendMessage(ChatColor.GOLD + "- " +ChatColor.translateAlternateColorCodes('&', rank));
         }
         Util.sendEmptyMsg(sender, LINE_BREAK);
-        sender.sendMessage(ChatColor.GOLD+"           RankList "+plugin.version+" for 1.7.9 available on Bukkit Dev   ");
-        Util.sendEmptyMsg(sender, LINE_BREAK);
     }
 
     public static void sendMsg(CommandSender sender, String message) {
